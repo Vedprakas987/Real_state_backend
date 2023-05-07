@@ -5,6 +5,7 @@ const Relater=(req,res,next)=>{
     if(token){
         const decoded = jwt.verify(token,"ved")
         req.body.userid=decoded.userid
+        console.log(decoded)
         next()
     }
 }

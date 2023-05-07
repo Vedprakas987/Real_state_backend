@@ -1,8 +1,9 @@
 const express = require("express")
 const { OrderModel } = require("../Model/order.model")
+const { Relater } = require("../middleware/UsertoBookRelater")
 const orderRouter = express.Router()
 orderRouter.use(express.json())
-
+orderRouter.use(Relater)
 orderRouter.post("/order",async(req,res)=>{
     const payload = req.body
 try{

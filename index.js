@@ -1,22 +1,38 @@
-const express = require("express")
-const { connection } = require("./connection/db")
-const { userRouter } = require("./Routes/user.Routes")
-const { bookRouter } = require("./Routes/book.Router")
-const { Relater } = require("./middleware/UsertoBookRelater")
-const { orderRouter } = require("./Routes/order.Router")
-const cors=require("cors")
-const app = express()
-app.use(cors())
-app.use(express.json())
-app.use("/",userRouter)
-app.use(Relater)
-app.use("/books",bookRouter)
-app.use("/",orderRouter)
-app.listen(4800,async(req,res)=>{
-    try{
-        await connection
-        console.log("Your server is running on Port 4800")
-    }catch(err){
-        console.log(err.massage)
-    }
-})
+const express = require("express");
+const cors = require("cors");
+const { connection } = require("./connection/db");
+const { userRouter } = require("./Routes/user.Routes");
+const { Relater } = require("./middleware/UsertoBookRelater");
+const { orderRouter } = require("./Routes/order.Router");
+const { PropertyRouter } = require("./Routes/property.Router");
+
+const app = express();
+
+// enable all cors requests
+app.use(cors());
+
+// Body parsing middleware
+app.use(express.json());
+
+// Mount routers
+app.use("/", userRouter);
+app.use(Relater);
+app.use("/property", PropertyRouter);
+app.use("/", orderRouter);
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something went wrong!");
+});
+
+// Start the server
+const port = process.env.PORT || 4800;
+app.listen(port, async () => {
+  try {
+    await connection;
+    console.log(`Server is running on port ${port}`);
+  } catch (err) {
+    console.log(err.message);
+  }
+});
