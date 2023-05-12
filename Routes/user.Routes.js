@@ -4,7 +4,9 @@ userRouter.use(express.json())
 const bcrypt = require("bcrypt")
 const jsw = require("jsonwebtoken")
 const { userModel } = require("../Model/user.model")
-
+userRouter.get("/",(req,res)=>{
+    res.send("welcome to users")
+})
 userRouter.post("/register",(req,res)=>{
     const {name,email,password,isAdmin} = req.body
     bcrypt.hash(password,3,function(err,hash){
