@@ -5,14 +5,19 @@ const { userRouter } = require("./Routes/user.Routes");
 const { Relater } = require("./middleware/UsertoBookRelater");
 const { orderRouter } = require("./Routes/order.Router");
 const { PropertyRouter } = require("./Routes/property.Router");
-
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json'); // Replace with the path to your Swagger file
+// Create an instance of Express app
 const app = express();
 
-// enable all cors requests
+// Enable all CORS requests
 app.use(cors());
 
 // Body parsing middleware
 app.use(express.json());
+
+// Serve Swagger UI at /api-docs
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Mount routers
 app.use("/", userRouter);
