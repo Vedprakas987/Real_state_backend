@@ -9,7 +9,7 @@ PropertyRouter.post("/",async(req,res)=>{
        await new_book.save()
        res.send({"msg":"new book is posted"})
     }catch(err){
-        res.send({"msg":"something went wrong"})
+        res.send({"msg":"something went wrong","error":err.massage})
     }
 }
 )
@@ -41,7 +41,7 @@ PropertyRouter.post("/",async(req,res)=>{
 PropertyRouter.get("/:id",async(req,res)=>{
     let x = req.params.id
     console.log(x)
-    const token = req.headers.authorization
+    const token = req?.headers?.authorization?.split(' ')[1]
     const {userid} = jwt.verify(token,"ved")
     try{
         const data = await PropertyModel.find({_id:x})
