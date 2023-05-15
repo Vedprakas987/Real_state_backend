@@ -36,7 +36,7 @@ userRouter.post("/login", async (req, res) => {
     if (!passwordMatch) {
       return res.status(401).send({ message: "Invalid credentials" });
     }
-    const token = jwt.sign({ userId: user._id }, "secretKey");
+    const token = jwt.sign({ userId: user._id }, "ved");
     res.send({ message: "You are logged in", token });
   } catch (error) {
     res.status(500).send({ message: "An error occurred while logging in" });
