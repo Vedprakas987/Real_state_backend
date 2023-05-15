@@ -5,7 +5,7 @@ const OrderSchema={
     totalAmount: Number
 }
 
-const OrderModel=mongoose.model("Orderdata",OrderSchema)
+const OrderModel=mongoose.model("orderdatas",OrderSchema)
 module.exports={
     OrderModel
 }

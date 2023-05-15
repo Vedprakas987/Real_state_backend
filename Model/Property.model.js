@@ -5,12 +5,13 @@ const PropertySchema = new mongoose.Schema({
   location: String,
   price: Number,
   contactNumber: String,
-  area: Number,
+  area: String,
   userid:String,
 });
 
-const PropertyModel = mongoose.model("Property", PropertySchema);
+const PropertyModel = mongoose.model("properties", PropertySchema);
 
 module.exports = {
+
   PropertyModel
 };

@@ -19,6 +19,7 @@ app.use(express.json());
 // Mount routers
 app.use("/", userRouter);
 app.use(Relater);
+//  app.use('/blog',Router)
 app.use("/property", PropertyRouter);
 app.use("/", orderRouter);
 

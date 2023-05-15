@@ -6,7 +6,7 @@ const userSchema=mongoose.Schema({
     isAdmin: Boolean
 })
 
-const userModel = mongoose.model("userdata",userSchema)
+const userModel = mongoose.model("userdatas",userSchema)
 
 module.exports={
     userModel
