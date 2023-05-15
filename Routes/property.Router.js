@@ -38,11 +38,36 @@ PropertyRouter.post("/",async(req,res)=>{
         } catch (err) {
         //   console.log({ msg: err.message });
         }
+
+        
+
       });
       
   
 
+      PropertyRouter.get("/", async (req, res) => {
+        const token =  req?.headers?.authorization?.split(' ')[1]
+            const { userId } = jwt.verify(token, "ved");
+         
+      
+           let query = { userid: userId };
+      
+           if (req.query) {
+          query = { ...query, ...req.query };
+           }
+      
+        try {
+          const data = await PropertyModel.find();
+          console.log(data,query)
+          res.send(data);
+        } catch (err) {
+        //   console.log({ msg: err.message });
+        }
 
+        
+
+      });
+      
 
 
 PropertyRouter.get("/:id",async(req,res)=>{
